@@ -100,25 +100,8 @@ class Happy
 			_input.change (e) =>
 				@checkCheckboxState(_input)
 
-			label = _input.parent('label')
-			if (label)
-				label.click (e) ->
-					if e.offsetX and e.offsetY
-						human_x = _input.closest('form').find('input[name=human_x]')
-						if human_x
-							human_x.val('x_human_' + e.offsetX)
-						
-						human_y = _input.closest('form').find('input[name=human_y]')
-						if human_y
-							human_y.val('y_human_' + e.offsetY)
-
 			# Set action functionality for custom click
 			checkbox.click (e) ->
-				human_x = _input.closest('form').find('input[name=human_x]')
-				if human_x then human_x.val('x_human_' + e.offsetX)
-				human_y = _input.closest('form').find('input[name=human_y]')
-				if human_y then human_y.val('y_human_' + e.offsetY)
-
 				if checkbox.hasClass('active')
 					$('input[type=checkbox][name='+checkbox.data('name')+']').prop('checked', true)
 					checkbox.removeClass('active')

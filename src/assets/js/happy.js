@@ -87,7 +87,7 @@ Happy = (function() {
   Happy.prototype.initCheckbox = function() {
     return $('input[type=checkbox].happy').each((function(_this) {
       return function(index, _input) {
-        var c, checkbox, i, label, len, ref;
+        var c, checkbox, i, len, ref;
         checkbox = $(_this.templates.checkbox).insertAfter($(_input));
         _input = $(_input);
         ref = _this.colors;
@@ -104,32 +104,7 @@ Happy = (function() {
         _input.change(function(e) {
           return _this.checkCheckboxState(_input);
         });
-        label = _input.parent('label');
-        if (label) {
-          label.click(function(e) {
-            var human_x, human_y;
-            if (e.offsetX && e.offsetY) {
-              human_x = _input.closest('form').find('input[name=human_x]');
-              if (human_x) {
-                human_x.val('x_human_' + e.offsetX);
-              }
-              human_y = _input.closest('form').find('input[name=human_y]');
-              if (human_y) {
-                return human_y.val('y_human_' + e.offsetY);
-              }
-            }
-          });
-        }
         checkbox.click(function(e) {
-          var human_x, human_y;
-          human_x = _input.closest('form').find('input[name=human_x]');
-          if (human_x) {
-            human_x.val('x_human_' + e.offsetX);
-          }
-          human_y = _input.closest('form').find('input[name=human_y]');
-          if (human_y) {
-            human_y.val('y_human_' + e.offsetY);
-          }
           if (checkbox.hasClass('active')) {
             $('input[type=checkbox][name=' + checkbox.data('name') + ']').prop('checked', true);
             return checkbox.removeClass('active');
