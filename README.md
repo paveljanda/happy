@@ -24,3 +24,6 @@ See [demo](http://happy.paveljanda.com)
 
 		<input class="happy primary">
 
+3) In case you need to re-init Happy JS, call
+
+	window.happy.reset();
