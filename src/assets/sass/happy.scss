@@ -1,0 +1,13 @@
+/**
+ * Base file for gathering all components styles
+ */
+
+@import 'variables/colors';
+@import 'variables/dimensions';
+@import 'variables/timing';
+
+@import 'components/mixins';
+@import 'components/common';
+
+@import 'components/checkbox';
+@import 'components/radio';
