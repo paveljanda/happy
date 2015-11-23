@@ -15,69 +15,72 @@ class Happy
 		}
 
 	# Add some colors
-	colorify: (_input, radio, c) ->
-		if _input.hasClass(c)
-			radio.addClass(c)
+	colorify: (input, happy_input, class_string) ->
+		if input.classList.contains(class_string)
+			happy_input.classList.add(class_string)
 
-	setNames: (_input, radio) ->
-		###console.log(radio)###
-		radio.attr('data-name', _input.attr('name'))
+	setNames: (input, happy_input) ->
+		happy_input.setAttribute('data-name', input.getAttribute('name'))
 
-		if typeof(_input.attr('value') != 'undefined') and _input.attr('value') != false
-			radio.attr('data-value', _input.attr('value'))
+		if typeof(input.getAttribute('value') != 'undefined') and input.getAttribute('value') != false
+			happy_input.setAttribute('data-value', input.getAttribute('value'))
 
 
 	init: ->
-		@initLables()
 		@initRadio()
-		@initCheckbox()
+		#@initCheckbox()
+
+	removeBySelector: (s) ->
+		elements = document.querySelectorAll(s)
+		for	el in elements
+			el.parentNode.removeChild(el)
 
 	reset: ->
-		$('.happy-radio').remove()
-		$('.happy-checkbox').remove()
-		$('label').unbind('click')
+		@removeBySelector('.happy-radio')
+		@removeBySelector('.happy-checkbox')
 
 		@init()
 
-	initLables: ->
-		$('label:not(.selectable), .noselect').on('selectstart', ->
-			return false
-		)
-
 	initRadio: ->
-		$('input[type=radio].happy').each (index, _input) =>
+		inputs = document.querySelectorAll('input[type=radio].happy')
+		for input in inputs
 			# Paste happy-component into html
-			radio = $(@templates.radio).insertAfter($(_input))
-			_input = $(_input)
+			input.insertAdjacentHTML('afterend', @templates.radio)
+			happy_input = input.nextElementSibling
 
 			# Add optional colors
 			for c in @colors
-				@colorify(_input, radio, c)
-				@setNames(_input, radio)
-
-			###_input.focus -> radio.addClass('focus')
-			_input.blur -> radio.removeClass('focus')###
+				@colorify(input, happy_input, c)
+				@setNames(input, happy_input)
 
 			# Init state
-			@checkRadioState(_input)
-
-
+			@checkRadioState(input)
 
 			# Set aciton functionality for native change
-			_input.change =>
-				$('.happy-radio[data-name='+_input.attr('name')+']').removeClass('active')
-				@checkRadioState(_input)
+			input.addEventListener('change', @radioOnChange)
 
-			# Set aciton functionality for custom click
-			radio.click ->
-				if !radio.hasClass('active')
-					_i = $('input[type=radio][name='+radio.data('name')+'][value='+radio.data('value')+']')
-					_i.prop('checked', true)
-					_i.trigger("change")
+	radioOnChange: (e) =>
+		target_input = e.target
+		name = target_input.getAttribute('name')
+		selector = '.happy-radio[data-name='+name+']'
 
-	checkRadioState: (_input) ->
-		if _input.prop('checked')
-			$('.happy-radio[data-name='+_input.attr('name')+'][data-value='+_input.attr('value')+']').addClass('active')
+		happy_radios = document.querySelectorAll(selector)
+
+		for happy_radio in happy_radios
+			happy_radio.classList.remove('active')
+
+		@checkRadioState(target_input)
+
+	checkRadioState: (input) ->
+		if input.checked
+			name = input.getAttribute('name')
+			value = input.getAttribute('value')
+			selector = '.happy-radio[data-name='+name+'][data-value='+value+']'
+
+			happy_radio = document.querySelector(selector)
+			#console.log(name, value)
+			if happy_radio
+				happy_radio.classList.add('active')
 
 	initCheckbox: ->
 		$('input[type=checkbox].happy').each (index, _input) =>

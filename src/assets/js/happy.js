@@ -1,7 +1,9 @@
-var Happy;
+var Happy,
+  bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 Happy = (function() {
   function Happy() {
+    this.radioOnChange = bind(this.radioOnChange, this);
     this.colors = ['primary', 'success', 'info', 'warning', 'danger', 'white'];
     this.templates = {
       radio: '<div class="happy-radio"><b></b></div>',
@@ -11,76 +13,83 @@ Happy = (function() {
     };
   }
 
-  Happy.prototype.colorify = function(_input, radio, c) {
-    if (_input.hasClass(c)) {
-      return radio.addClass(c);
+  Happy.prototype.colorify = function(input, happy_input, class_string) {
+    if (input.classList.contains(class_string)) {
+      return happy_input.classList.add(class_string);
     }
   };
 
-  Happy.prototype.setNames = function(_input, radio) {
-
-    /*console.log(radio) */
-    radio.attr('data-name', _input.attr('name'));
-    if (typeof (_input.attr('value') !== 'undefined') && _input.attr('value') !== false) {
-      return radio.attr('data-value', _input.attr('value'));
+  Happy.prototype.setNames = function(input, happy_input) {
+    happy_input.setAttribute('data-name', input.getAttribute('name'));
+    if (typeof (input.getAttribute('value') !== 'undefined') && input.getAttribute('value') !== false) {
+      return happy_input.setAttribute('data-value', input.getAttribute('value'));
     }
   };
 
   Happy.prototype.init = function() {
-    this.initLables();
-    this.initRadio();
-    return this.initCheckbox();
+    return this.initRadio();
+  };
+
+  Happy.prototype.removeBySelector = function(s) {
+    var el, elements, i, len, results;
+    elements = document.querySelectorAll(s);
+    results = [];
+    for (i = 0, len = elements.length; i < len; i++) {
+      el = elements[i];
+      results.push(el.parentNode.removeChild(el));
+    }
+    return results;
   };
 
   Happy.prototype.reset = function() {
-    $('.happy-radio').remove();
-    $('.happy-checkbox').remove();
-    $('label').unbind('click');
+    this.removeBySelector('.happy-radio');
+    this.removeBySelector('.happy-checkbox');
     return this.init();
   };
 
-  Happy.prototype.initLables = function() {
-    return $('label:not(.selectable), .noselect').on('selectstart', function() {
-      return false;
-    });
-  };
-
   Happy.prototype.initRadio = function() {
-    return $('input[type=radio].happy').each((function(_this) {
-      return function(index, _input) {
-        var c, i, len, radio, ref;
-        radio = $(_this.templates.radio).insertAfter($(_input));
-        _input = $(_input);
-        ref = _this.colors;
-        for (i = 0, len = ref.length; i < len; i++) {
-          c = ref[i];
-          _this.colorify(_input, radio, c);
-          _this.setNames(_input, radio);
-        }
-
-        /*_input.focus -> radio.addClass('focus')
-        			_input.blur -> radio.removeClass('focus')
-         */
-        _this.checkRadioState(_input);
-        _input.change(function() {
-          $('.happy-radio[data-name=' + _input.attr('name') + ']').removeClass('active');
-          return _this.checkRadioState(_input);
-        });
-        return radio.click(function() {
-          var _i;
-          if (!radio.hasClass('active')) {
-            _i = $('input[type=radio][name=' + radio.data('name') + '][value=' + radio.data('value') + ']');
-            _i.prop('checked', true);
-            return _i.trigger("change");
-          }
-        });
-      };
-    })(this));
+    var c, happy_input, i, input, inputs, j, len, len1, ref, results;
+    inputs = document.querySelectorAll('input[type=radio].happy');
+    results = [];
+    for (i = 0, len = inputs.length; i < len; i++) {
+      input = inputs[i];
+      input.insertAdjacentHTML('afterend', this.templates.radio);
+      happy_input = input.nextElementSibling;
+      ref = this.colors;
+      for (j = 0, len1 = ref.length; j < len1; j++) {
+        c = ref[j];
+        this.colorify(input, happy_input, c);
+        this.setNames(input, happy_input);
+      }
+      this.checkRadioState(input);
+      results.push(input.addEventListener('change', this.radioOnChange));
+    }
+    return results;
   };
 
-  Happy.prototype.checkRadioState = function(_input) {
-    if (_input.prop('checked')) {
-      return $('.happy-radio[data-name=' + _input.attr('name') + '][data-value=' + _input.attr('value') + ']').addClass('active');
+  Happy.prototype.radioOnChange = function(e) {
+    var happy_radio, happy_radios, i, len, name, selector, target_input;
+    target_input = e.target;
+    name = target_input.getAttribute('name');
+    selector = '.happy-radio[data-name=' + name + ']';
+    happy_radios = document.querySelectorAll(selector);
+    for (i = 0, len = happy_radios.length; i < len; i++) {
+      happy_radio = happy_radios[i];
+      happy_radio.classList.remove('active');
+    }
+    return this.checkRadioState(target_input);
+  };
+
+  Happy.prototype.checkRadioState = function(input) {
+    var happy_radio, name, selector, value;
+    if (input.checked) {
+      name = input.getAttribute('name');
+      value = input.getAttribute('value');
+      selector = '.happy-radio[data-name=' + name + '][data-value=' + value + ']';
+      happy_radio = document.querySelector(selector);
+      if (happy_radio) {
+        return happy_radio.classList.add('active');
+      }
     }
   };
 
