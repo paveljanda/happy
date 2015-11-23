@@ -3,6 +3,9 @@ var Happy,
 
 Happy = (function() {
   function Happy() {
+    this.checkCheckboxState = bind(this.checkCheckboxState, this);
+    this.checkCheckboxStateOnChange = bind(this.checkCheckboxStateOnChange, this);
+    this.checkCheckboxStateOnClick = bind(this.checkCheckboxStateOnClick, this);
     this.radioOnChange = bind(this.radioOnChange, this);
     this.colors = ['primary', 'success', 'info', 'warning', 'danger', 'white'];
     this.templates = {
@@ -20,14 +23,17 @@ Happy = (function() {
   };
 
   Happy.prototype.setNames = function(input, happy_input) {
+    var value;
     happy_input.setAttribute('data-name', input.getAttribute('name'));
-    if (typeof (input.getAttribute('value') !== 'undefined') && input.getAttribute('value') !== false) {
+    value = input.getAttribute('value');
+    if (typeof (value !== 'undefined') && value !== false && value !== null) {
       return happy_input.setAttribute('data-value', input.getAttribute('value'));
     }
   };
 
   Happy.prototype.init = function() {
-    return this.initRadio();
+    this.initRadio();
+    return this.initCheckbox();
   };
 
   Happy.prototype.removeBySelector = function(s) {
@@ -94,46 +100,65 @@ Happy = (function() {
   };
 
   Happy.prototype.initCheckbox = function() {
-    return $('input[type=checkbox].happy').each((function(_this) {
-      return function(index, _input) {
-        var c, checkbox, i, len, ref;
-        checkbox = $(_this.templates.checkbox).insertAfter($(_input));
-        _input = $(_input);
-        ref = _this.colors;
-        for (i = 0, len = ref.length; i < len; i++) {
-          c = ref[i];
-          _this.colorify(_input, checkbox, c);
-          _this.setNames(_input, checkbox);
-        }
-
-        /*_input.focus -> checkbox.addClass('focus')
-        			_input.blur -> checkbox.removeClass('focus')
-         */
-        _this.checkCheckboxState(_input);
-        _input.change(function(e) {
-          return _this.checkCheckboxState(_input);
-        });
-        checkbox.click(function(e) {
-          if (checkbox.hasClass('active')) {
-            $('input[type=checkbox][name=' + checkbox.data('name') + ']').prop('checked', true);
-            return checkbox.removeClass('active');
-          } else {
-            $('input[type=checkbox][name=' + checkbox.data('name') + ']').prop('checked', false);
-            return checkbox.addClass('active');
-          }
-        });
-        if (_input.prop('checked')) {
-          return $('.happy-checkbox[data-name=' + _input.attr('name') + ']').addClass('active');
-        }
-      };
-    })(this));
+    var c, happy_input, i, input, inputs, j, len, len1, ref, results;
+    inputs = document.querySelectorAll('input[type=checkbox].happy');
+    results = [];
+    for (i = 0, len = inputs.length; i < len; i++) {
+      input = inputs[i];
+      input.insertAdjacentHTML('afterend', this.templates.checkbox);
+      happy_input = input.nextElementSibling;
+      ref = this.colors;
+      for (j = 0, len1 = ref.length; j < len1; j++) {
+        c = ref[j];
+        this.colorify(input, happy_input, c);
+        this.setNames(input, happy_input);
+      }
+      this.checkCheckboxState(input);
+      happy_input.addEventListener('click', this.checkCheckboxStateOnClick);
+      results.push(input.addEventListener('change', this.checkCheckboxStateOnChange));
+    }
+    return results;
   };
 
-  Happy.prototype.checkCheckboxState = function(_input) {
-    if (_input.prop('checked')) {
-      return $('.happy-checkbox[data-name=' + _input.attr('name') + ']').addClass('active');
+  Happy.prototype.checkCheckboxStateOnClick = function(e) {
+    var happy_input, input, selector;
+    e.preventDefault();
+    if (e.target.tagName === 'svg') {
+      happy_input = e.target.parentNode;
+    } else if (e.target.tagName === 'rect') {
+      happy_input = e.target.parentNode.parentNode;
     } else {
-      return $('.happy-checkbox[data-name=' + _input.attr('name') + ']').removeClass('active');
+      happy_input = e.target;
+    }
+    selector = 'input[type=checkbox][name=' + happy_input.getAttribute('data-name') + ']';
+    input = document.querySelector(selector);
+    if (input) {
+      if (happy_input.classList.contains('active')) {
+        input.checked = false;
+        return happy_input.classList.remove('active');
+      } else {
+        input.checked = true;
+        return happy_input.classList.add('active');
+      }
+    }
+  };
+
+  Happy.prototype.checkCheckboxStateOnChange = function(e) {
+    var input;
+    input = e.target;
+    return this.checkCheckboxState(input);
+  };
+
+  Happy.prototype.checkCheckboxState = function(input) {
+    var element, selector;
+    selector = '.happy-checkbox[data-name=' + input.getAttribute('name') + ']';
+    element = document.querySelector(selector);
+    if (element) {
+      if (input.checked) {
+        return element.classList.add('active');
+      } else {
+        return element.classList.remove('active');
+      }
     }
   };
 
@@ -141,7 +166,7 @@ Happy = (function() {
 
 })();
 
-$(function() {
+document.addEventListener('DOMContentLoaded', function() {
   window.happy = new Happy();
   return window.happy.init();
 });

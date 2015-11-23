@@ -22,13 +22,15 @@ class Happy
 	setNames: (input, happy_input) ->
 		happy_input.setAttribute('data-name', input.getAttribute('name'))
 
-		if typeof(input.getAttribute('value') != 'undefined') and input.getAttribute('value') != false
+		value = input.getAttribute('value')
+
+		if typeof(value != 'undefined') and value != false and value != null
 			happy_input.setAttribute('data-value', input.getAttribute('value'))
 
 
 	init: ->
 		@initRadio()
-		#@initCheckbox()
+		@initCheckbox()
 
 	removeBySelector: (s) ->
 		elements = document.querySelectorAll(s)
@@ -78,49 +80,65 @@ class Happy
 			selector = '.happy-radio[data-name='+name+'][data-value='+value+']'
 
 			happy_radio = document.querySelector(selector)
-			#console.log(name, value)
+
 			if happy_radio
 				happy_radio.classList.add('active')
 
 	initCheckbox: ->
-		$('input[type=checkbox].happy').each (index, _input) =>
+		inputs = document.querySelectorAll('input[type=checkbox].happy')
+		for input in inputs
 			# Paste happy-component into html
-			checkbox = $(@templates.checkbox).insertAfter($(_input))
-			_input = $(_input)
+			input.insertAdjacentHTML('afterend', @templates.checkbox)
+			happy_input = input.nextElementSibling
 
 			# Add optional colors
 			for c in @colors
-				@colorify(_input, checkbox, c)
-				@setNames(_input, checkbox)
-
-			###_input.focus -> checkbox.addClass('focus')
-			_input.blur -> checkbox.removeClass('focus')###
+				@colorify(input, happy_input, c)
+				@setNames(input, happy_input)
 
 			# Init state
-			@checkCheckboxState(_input)
+			@checkCheckboxState(input)
 
-			# Set aciton functionality for native change
-			_input.change (e) =>
-				@checkCheckboxState(_input)
+			# Set action functionality for click || native change
+			happy_input.addEventListener('click', @checkCheckboxStateOnClick)
+			input.addEventListener('change', @checkCheckboxStateOnChange)
 
-			# Set action functionality for custom click
-			checkbox.click (e) ->
-				if checkbox.hasClass('active')
-					$('input[type=checkbox][name='+checkbox.data('name')+']').prop('checked', true)
-					checkbox.removeClass('active')
-				else
-					$('input[type=checkbox][name='+checkbox.data('name')+']').prop('checked', false)
-					checkbox.addClass('active')
+	checkCheckboxStateOnClick: (e) =>
+		e.preventDefault()
 
-			if _input.prop('checked')
-				$('.happy-checkbox[data-name='+_input.attr('name')+']').addClass('active')
-
-	checkCheckboxState: (_input) ->
-		if _input.prop('checked')
-			$('.happy-checkbox[data-name='+_input.attr('name')+']').addClass('active')
+		if e.target.tagName == 'svg'
+			happy_input = e.target.parentNode
+		else if e.target.tagName == 'rect'
+			happy_input = e.target.parentNode.parentNode
 		else
-			$('.happy-checkbox[data-name='+_input.attr('name')+']').removeClass('active')
+			happy_input = e.target
+		
+		selector = 'input[type=checkbox][name='+happy_input.getAttribute('data-name')+']'
+		input = document.querySelector(selector)
 
-$ ->
+		if input
+			if happy_input.classList.contains('active')
+				input.checked = false
+				happy_input.classList.remove('active')
+			else
+				input.checked = true
+				happy_input.classList.add('active')
+
+	checkCheckboxStateOnChange: (e) =>
+		input = e.target
+		@checkCheckboxState(input)
+
+	checkCheckboxState: (input) =>
+		selector = '.happy-checkbox[data-name='+input.getAttribute('name')+']'
+		element = document.querySelector(selector)
+
+		if element
+			if input.checked
+				element.classList.add('active')
+			else
+				element.classList.remove('active')
+
+
+document.addEventListener 'DOMContentLoaded', ->
 	window.happy = new Happy()
 	window.happy.init()
