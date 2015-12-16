@@ -77,7 +77,7 @@ Happy = (function() {
     var happy_radio, happy_radios, i, len, name, selector, target_input;
     target_input = e.target;
     name = target_input.getAttribute('name');
-    selector = '.happy-radio[data-name=' + name + ']';
+    selector = '.happy-radio[data-name="' + name + '"]';
     happy_radios = document.querySelectorAll(selector);
     for (i = 0, len = happy_radios.length; i < len; i++) {
       happy_radio = happy_radios[i];
@@ -91,7 +91,7 @@ Happy = (function() {
     if (input.checked) {
       name = input.getAttribute('name');
       value = input.getAttribute('value');
-      selector = '.happy-radio[data-name=' + name + '][data-value=' + value + ']';
+      selector = '.happy-radio[data-name="' + name + '""][data-value=' + value + ']';
       happy_radio = document.querySelector(selector);
       if (happy_radio) {
         return happy_radio.classList.add('active');
@@ -130,7 +130,7 @@ Happy = (function() {
     } else {
       happy_input = e.target;
     }
-    selector = 'input[type=checkbox][name=' + happy_input.getAttribute('data-name') + ']';
+    selector = 'input[type=checkbox][name="' + happy_input.getAttribute('data-name') + '"]';
     input = document.querySelector(selector);
     if (input) {
       if (happy_input.classList.contains('active')) {
@@ -151,7 +151,7 @@ Happy = (function() {
 
   Happy.prototype.checkCheckboxState = function(input) {
     var element, selector;
-    selector = '.happy-checkbox[data-name=' + input.getAttribute('name') + ']';
+    selector = '.happy-checkbox[data-name="' + input.getAttribute('name') + '"]';
     element = document.querySelector(selector);
     if (element) {
       if (input.checked) {

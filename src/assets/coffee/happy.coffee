@@ -64,7 +64,7 @@ class Happy
 	radioOnChange: (e) =>
 		target_input = e.target
 		name = target_input.getAttribute('name')
-		selector = '.happy-radio[data-name='+name+']'
+		selector = '.happy-radio[data-name="'+name+'"]'
 
 		happy_radios = document.querySelectorAll(selector)
 
@@ -77,7 +77,7 @@ class Happy
 		if input.checked
 			name = input.getAttribute('name')
 			value = input.getAttribute('value')
-			selector = '.happy-radio[data-name='+name+'][data-value='+value+']'
+			selector = '.happy-radio[data-name="'+name+'""][data-value='+value+']'
 
 			happy_radio = document.querySelector(selector)
 
@@ -113,7 +113,7 @@ class Happy
 		else
 			happy_input = e.target
 		
-		selector = 'input[type=checkbox][name='+happy_input.getAttribute('data-name')+']'
+		selector = 'input[type=checkbox][name="'+happy_input.getAttribute('data-name')+'"]'
 		input = document.querySelector(selector)
 
 		if input
@@ -129,7 +129,7 @@ class Happy
 		@checkCheckboxState(input)
 
 	checkCheckboxState: (input) =>
-		selector = '.happy-checkbox[data-name='+input.getAttribute('name')+']'
+		selector = '.happy-checkbox[data-name="'+input.getAttribute('name')+'"]'
 		element = document.querySelector(selector)
 
 		if element
