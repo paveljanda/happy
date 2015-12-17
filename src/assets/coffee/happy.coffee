@@ -59,10 +59,15 @@ class Happy
 			@checkRadioState(input)
 
 			# Set aciton functionality for native change
-			input.addEventListener('change', @radioOnChange)
+			# input.addEventListener('change', @radioOnChange)
+			document.addEventListener('change', @radioOnChange)
 
 	radioOnChange: (e) =>
 		target_input = e.target
+
+		if !target_input.classList.contains('happy')
+			return
+
 		name = target_input.getAttribute('name')
 		selector = '.happy-radio[data-name="'+name+'"]'
 
@@ -100,19 +105,22 @@ class Happy
 			@checkCheckboxState(input)
 
 			# Set action functionality for click || native change
-			happy_input.addEventListener('click', @checkCheckboxStateOnClick)
-			input.addEventListener('change', @checkCheckboxStateOnChange)
+			document.addEventListener('click', @checkCheckboxStateOnClick)
+			document.addEventListener('change', @checkCheckboxStateOnChange)
 
 	checkCheckboxStateOnClick: (e) =>
-		e.preventDefault()
-
 		if e.target.tagName == 'svg'
 			happy_input = e.target.parentNode
 		else if e.target.tagName == 'rect'
 			happy_input = e.target.parentNode.parentNode
 		else
 			happy_input = e.target
-		
+
+		if !happy_input or !happy_input.classList.contains('happy-checkbox')
+			return
+
+		e.preventDefault()
+
 		selector = 'input[type=checkbox][name="'+happy_input.getAttribute('data-name')+'"]'
 		input = document.querySelector(selector)
 
@@ -128,8 +136,9 @@ class Happy
 			input.dispatchEvent(event)
 
 	checkCheckboxStateOnChange: (e) =>
-		input = e.target
-		@checkCheckboxState(input)
+		if e.target.classList.contains('happy')
+			input = e.target
+			@checkCheckboxState(input)
 
 	checkCheckboxState: (input) =>
 		selector = '.happy-checkbox[data-name="'+input.getAttribute('name')+'"]'

@@ -68,7 +68,7 @@ Happy = (function() {
         this.setNames(input, happy_input);
       }
       this.checkRadioState(input);
-      results.push(input.addEventListener('change', this.radioOnChange));
+      results.push(document.addEventListener('change', this.radioOnChange));
     }
     return results;
   };
@@ -76,6 +76,9 @@ Happy = (function() {
   Happy.prototype.radioOnChange = function(e) {
     var happy_radio, happy_radios, i, len, name, selector, target_input;
     target_input = e.target;
+    if (!target_input.classList.contains('happy')) {
+      return;
+    }
     name = target_input.getAttribute('name');
     selector = '.happy-radio[data-name="' + name + '"]';
     happy_radios = document.querySelectorAll(selector);
@@ -114,15 +117,14 @@ Happy = (function() {
         this.setNames(input, happy_input);
       }
       this.checkCheckboxState(input);
-      happy_input.addEventListener('click', this.checkCheckboxStateOnClick);
-      results.push(input.addEventListener('change', this.checkCheckboxStateOnChange));
+      document.addEventListener('click', this.checkCheckboxStateOnClick);
+      results.push(document.addEventListener('change', this.checkCheckboxStateOnChange));
     }
     return results;
   };
 
   Happy.prototype.checkCheckboxStateOnClick = function(e) {
     var event, happy_input, input, selector;
-    e.preventDefault();
     if (e.target.tagName === 'svg') {
       happy_input = e.target.parentNode;
     } else if (e.target.tagName === 'rect') {
@@ -130,6 +132,10 @@ Happy = (function() {
     } else {
       happy_input = e.target;
     }
+    if (!happy_input || !happy_input.classList.contains('happy-checkbox')) {
+      return;
+    }
+    e.preventDefault();
     selector = 'input[type=checkbox][name="' + happy_input.getAttribute('data-name') + '"]';
     input = document.querySelector(selector);
     if (input) {
@@ -149,8 +155,10 @@ Happy = (function() {
 
   Happy.prototype.checkCheckboxStateOnChange = function(e) {
     var input;
-    input = e.target;
-    return this.checkCheckboxState(input);
+    if (e.target.classList.contains('happy')) {
+      input = e.target;
+      return this.checkCheckboxState(input);
+    }
   };
 
   Happy.prototype.checkCheckboxState = function(input) {
