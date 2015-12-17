@@ -1,7 +1,7 @@
 class Happy
 
 	constructor: () ->
-		@colors = ['primary', 'success', 'info', 'warning', 'danger', 'white']
+		@colors = ['primary', 'success', 'info', 'warning', 'danger', 'white', 'gray']
 		@templates = {
 			radio: '<div class="happy-radio"><b></b></div>',
 			checkbox: '<div class="happy-checkbox">
@@ -18,6 +18,9 @@ class Happy
 	colorify: (input, happy_input, class_string) ->
 		if input.classList.contains(class_string)
 			happy_input.classList.add(class_string)
+
+		if input.classList.contains(class_string + '-border')
+			happy_input.classList.add(class_string + '-border')
 
 	setNames: (input, happy_input) ->
 		happy_input.setAttribute('data-name', input.getAttribute('name'))

@@ -48,6 +48,12 @@ label{cursor:pointer;position:relative}
 .happy-checkbox svg rect:first-child{-ms-transform:rotate(45deg);-webkit-transform:rotate(45deg);transform:rotate(45deg)}
 .happy-checkbox svg rect:nth-child(2){-ms-transform:rotate(-45deg);-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}
 .happy-checkbox.white{border-color:#fff}
+.happy-checkbox.gray-border{border-color:#858585}
+.happy-checkbox.primary-border{border-color:#4C86BB}
+.happy-checkbox.success-border{border-color:#72B889}
+.happy-checkbox.info-border{border-color:#5bc0de}
+.happy-checkbox.warning-border{border-color:#F0BB65}
+.happy-checkbox.danger-border{border-color:#ED6B6B}
 .happy-checkbox.primary svg{background-color:#4C86BB}
 .happy-checkbox.success svg{background-color:#72B889}
 .happy-checkbox.info svg{background-color:#5bc0de}

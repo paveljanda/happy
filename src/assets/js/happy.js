@@ -7,7 +7,7 @@ Happy = (function() {
     this.checkCheckboxStateOnChange = bind(this.checkCheckboxStateOnChange, this);
     this.checkCheckboxStateOnClick = bind(this.checkCheckboxStateOnClick, this);
     this.radioOnChange = bind(this.radioOnChange, this);
-    this.colors = ['primary', 'success', 'info', 'warning', 'danger', 'white'];
+    this.colors = ['primary', 'success', 'info', 'warning', 'danger', 'white', 'gray'];
     this.templates = {
       radio: '<div class="happy-radio"><b></b></div>',
       checkbox: '<div class="happy-checkbox"> <svg viewBox="0 0 30 30"> <rect class="mark-storke" x="15" y="3" rx="1" ry="1" width="10" height="4"/> <rect class="mark-storke" x="-7" y="21" rx="1" ry="1" width="19" height="4"/> </svg> </div>',
@@ -18,7 +18,10 @@ Happy = (function() {
 
   Happy.prototype.colorify = function(input, happy_input, class_string) {
     if (input.classList.contains(class_string)) {
-      return happy_input.classList.add(class_string);
+      happy_input.classList.add(class_string);
+    }
+    if (input.classList.contains(class_string + '-border')) {
+      return happy_input.classList.add(class_string + '-border');
     }
   };
 

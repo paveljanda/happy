@@ -40,6 +40,13 @@
 		border-color: $white;
 	}
 
+	&.gray-border { border-color: #858585; }
+	&.primary-border { border-color: $primary; }
+	&.success-border { border-color: $success; }
+	&.info-border { border-color: $info; }
+	&.warning-border { border-color: $warning; }
+	&.danger-border { border-color: $danger; }
+
 	&.primary svg { @include happy-component-backround-color($primary); }
 	&.success svg { @include happy-component-backround-color($success); }
 	&.info svg { @include happy-component-backround-color($info); }
