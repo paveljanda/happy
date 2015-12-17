@@ -77,7 +77,7 @@ class Happy
 		if input.checked
 			name = input.getAttribute('name')
 			value = input.getAttribute('value')
-			selector = '.happy-radio[data-name="'+name+'""][data-value='+value+']'
+			selector = '.happy-radio[data-name="'+name+'"][data-value='+value+']'
 
 			happy_radio = document.querySelector(selector)
 
@@ -123,6 +123,9 @@ class Happy
 			else
 				input.checked = true
 				happy_input.classList.add('active')
+
+			event = new Event('change', {'bubbles': true})
+			input.dispatchEvent(event)
 
 	checkCheckboxStateOnChange: (e) =>
 		input = e.target

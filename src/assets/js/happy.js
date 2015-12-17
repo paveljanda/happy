@@ -91,7 +91,7 @@ Happy = (function() {
     if (input.checked) {
       name = input.getAttribute('name');
       value = input.getAttribute('value');
-      selector = '.happy-radio[data-name="' + name + '""][data-value=' + value + ']';
+      selector = '.happy-radio[data-name="' + name + '"][data-value=' + value + ']';
       happy_radio = document.querySelector(selector);
       if (happy_radio) {
         return happy_radio.classList.add('active');
@@ -121,7 +121,7 @@ Happy = (function() {
   };
 
   Happy.prototype.checkCheckboxStateOnClick = function(e) {
-    var happy_input, input, selector;
+    var event, happy_input, input, selector;
     e.preventDefault();
     if (e.target.tagName === 'svg') {
       happy_input = e.target.parentNode;
@@ -135,11 +135,15 @@ Happy = (function() {
     if (input) {
       if (happy_input.classList.contains('active')) {
         input.checked = false;
-        return happy_input.classList.remove('active');
+        happy_input.classList.remove('active');
       } else {
         input.checked = true;
-        return happy_input.classList.add('active');
+        happy_input.classList.add('active');
       }
+      event = new Event('change', {
+        'bubbles': true
+      });
+      return input.dispatchEvent(event);
     }
   };
 
