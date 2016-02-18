@@ -36,6 +36,15 @@
 		}
 	}
 
+	&.thin {
+		border-width: floor(($checkbox-size / $border_divider) - 1px);
+
+		svg {
+			top: -(floor(($checkbox-size / $border-divider) - 1px));
+			left: -(floor(($checkbox-size / $border-divider) - 1px));
+		}
+	}
+
 	&.white {
 		border-color: $white;
 	}

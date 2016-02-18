@@ -7,6 +7,10 @@
 	@include happy-component($radio-size);
 	@include border-radius($radio-size);
 
+	&.thin {
+		border-width: ($radio-size / $border_divider) - 1px;
+	}
+
 	b {
 		position: absolute;
 		display: block;

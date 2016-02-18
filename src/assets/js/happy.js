@@ -25,6 +25,12 @@ Happy = (function() {
     }
   };
 
+  Happy.prototype.thicknessify = function(input, happy_input) {
+    if (input.classList.contains('thin')) {
+      return happy_input.classList.add('thin');
+    }
+  };
+
   Happy.prototype.setNames = function(input, happy_input) {
     var value;
     happy_input.setAttribute('data-name', input.getAttribute('name'));
@@ -70,6 +76,7 @@ Happy = (function() {
         this.colorify(input, happy_input, c);
         this.setNames(input, happy_input);
       }
+      this.thicknessify(input, happy_input);
       this.checkRadioState(input);
       results.push(document.addEventListener('change', this.radioOnChange));
     }
@@ -119,6 +126,7 @@ Happy = (function() {
         this.colorify(input, happy_input, c);
         this.setNames(input, happy_input);
       }
+      this.thicknessify(input, happy_input);
       this.checkCheckboxState(input);
       document.addEventListener('click', this.checkCheckboxStateOnClick);
       results.push(document.addEventListener('change', this.checkCheckboxStateOnChange));

@@ -8,7 +8,7 @@
 	vertical-align: middle;
 	width: $size;
 	height: $size;
-	border-width: ($size / $border_divider);
+	border-width: floor($size / $border_divider);
 	border-style: solid;
 	cursor: pointer;
 	box-sizing: border-box;

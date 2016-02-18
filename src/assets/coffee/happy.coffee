@@ -22,6 +22,12 @@ class Happy
 		if input.classList.contains(class_string + '-border')
 			happy_input.classList.add(class_string + '-border')
 
+	# Set thickness
+	thicknessify: (input, happy_input) ->
+		if input.classList.contains('thin')
+			happy_input.classList.add('thin')
+		
+
 	setNames: (input, happy_input) ->
 		happy_input.setAttribute('data-name', input.getAttribute('name'))
 
@@ -57,6 +63,8 @@ class Happy
 			for c in @colors
 				@colorify(input, happy_input, c)
 				@setNames(input, happy_input)
+
+			@thicknessify(input, happy_input)
 
 			# Init state
 			@checkRadioState(input)
@@ -103,6 +111,8 @@ class Happy
 			for c in @colors
 				@colorify(input, happy_input, c)
 				@setNames(input, happy_input)
+
+			@thicknessify(input, happy_input)
 
 			# Init state
 			@checkCheckboxState(input)

@@ -296,7 +296,7 @@ label {
   vertical-align: middle;
   width: 16px;
   height: 16px;
-  border-width: 2.66667px;
+  border-width: 2px;
   border-style: solid;
   cursor: pointer;
   box-sizing: border-box;
@@ -341,6 +341,15 @@ label {
   -webkit-transform: rotate(-45deg);
   transform: rotate(-45deg);
   /* fill: yellow; */
+}
+
+.happy-checkbox.thin {
+  border-width: 1px;
+}
+
+.happy-checkbox.thin svg {
+  top: -1px;
+  left: -1px;
 }
 
 .happy-checkbox.white {
@@ -421,7 +430,7 @@ label {
   vertical-align: middle;
   width: 16px;
   height: 16px;
-  border-width: 2.66667px;
+  border-width: 2px;
   border-style: solid;
   cursor: pointer;
   box-sizing: border-box;
@@ -429,6 +438,10 @@ label {
   -webkit-border-radius: 16px;
   -moz-border-radius: 16px;
   border-radius: 16px;
+}
+
+.happy-radio.thin {
+  border-width: 1.66667px;
 }
 
 .happy-radio b {
