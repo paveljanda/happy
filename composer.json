@@ -1,0 +1,17 @@
+{
+	"name": "paveljanda/happy",
+	"type": "library",
+	"description": "Happy form inputs",
+	"keywords": ["happy", "input", "form"],
+	"homepage": "http://happy.paveljanda.com",
+	"license": ["MIT"],
+	"support": {
+		"issues": "https://github.com/paveljanda/happy/issues"
+	},
+	"authors": [
+		{
+			"name": "Pavel Janda",
+			"homepage": "http://paveljanda.com"
+		}
+	]
+}
