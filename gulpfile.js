@@ -18,11 +18,11 @@ var reload       = browser_sync.reload;
  * Paths to preprocessed files
  */
 var PATHS = {
-	styles           : 'src/assets/sass/happy.scss',
-	styles_all       : 'src/assets/sass/**/*.scss',
-	scripts          : 'src/assets/coffee/**/*.coffee',
-	styles_compiled  : 'src/assets/css',
-	scripts_compiled : 'src/assets/js'
+	styles           : 'src/sass/happy.scss',
+	styles_all       : 'src/sass/**/*.scss',
+	scripts          : 'src/coffee/**/*.coffee',
+	styles_compiled  : 'dist/css',
+	scripts_compiled : 'dist/js'
 };
 
 

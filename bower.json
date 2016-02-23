@@ -6,7 +6,10 @@
     "Pavel Janda <me@paveljanda.com>"
   ],
   "description": "Happy form inputs",
-  "main": "./src/assets/js/happy.js",
+  "main": [
+    "./dist/js/happy.js",
+    "./dist/js/happy.css"
+  ],
   "keywords": [
     "forms",
     "inputs",
