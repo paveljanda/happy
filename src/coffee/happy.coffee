@@ -145,8 +145,15 @@ class Happy
 				input.checked = true
 				happy_input.classList.add('active')
 
-			event = new Event('change', {'bubbles': true})
-			input.dispatchEvent(event)
+			ie = window.navigator.userAgent.indexOf("MSIE ")
+
+			if ie
+				event = document.createEvent('Event')
+				event.initEvent('change', true, true);
+			else
+				event = new Event('change', {'bubbles': true})
+
+			input.dispatchEvent(event);
 
 	checkCheckboxStateOnChange: (e) =>
 		if e.target.classList.contains('happy')

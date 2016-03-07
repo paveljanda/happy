@@ -135,7 +135,7 @@ Happy = (function() {
   };
 
   Happy.prototype.checkCheckboxStateOnClick = function(e) {
-    var event, happy_input, input, selector;
+    var event, happy_input, ie, input, selector;
     if (e.target.tagName === 'svg') {
       happy_input = e.target.parentNode;
     } else if (e.target.tagName === 'rect') {
@@ -157,9 +157,15 @@ Happy = (function() {
         input.checked = true;
         happy_input.classList.add('active');
       }
-      event = new Event('change', {
-        'bubbles': true
-      });
+      ie = window.navigator.userAgent.indexOf("MSIE ");
+      if (ie) {
+        event = document.createEvent('Event');
+        event.initEvent('change', true, true);
+      } else {
+        event = new Event('change', {
+          'bubbles': true
+        });
+      }
       return input.dispatchEvent(event);
     }
   };

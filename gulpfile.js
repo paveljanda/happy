@@ -21,8 +21,8 @@ var PATHS = {
 	styles           : 'src/sass/happy.scss',
 	styles_all       : 'src/sass/**/*.scss',
 	scripts          : 'src/coffee/**/*.coffee',
-	styles_compiled  : 'dist/css',
-	scripts_compiled : 'dist/js'
+	styles_compiled  : 'dist',
+	scripts_compiled : 'dist'
 };
 
 
