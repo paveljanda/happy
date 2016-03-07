@@ -149,11 +149,11 @@ class Happy
 
 			if ie
 				event = document.createEvent('Event')
-				event.initEvent('change', true, true);
+				event.initEvent('change', true, true)
 			else
 				event = new Event('change', {'bubbles': true})
 
-			input.dispatchEvent(event);
+			input.dispatchEvent(event)
 
 	checkCheckboxStateOnChange: (e) =>
 		if e.target.classList.contains('happy')
