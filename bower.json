@@ -7,8 +7,8 @@
   ],
   "description": "Happy form inputs",
   "main": [
-    "./dist/js/happy.js",
-    "./dist/js/happy.css"
+    "./dist/happy.js",
+    "./dist/happy.css"
   ],
   "keywords": [
     "forms",
