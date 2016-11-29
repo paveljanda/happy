@@ -104,7 +104,7 @@ Happy = (function() {
     if (input.checked) {
       name = input.getAttribute('name');
       value = input.getAttribute('value');
-      selector = '.happy-radio[data-name="' + name + '"][data-value=' + value + ']';
+      selector = '.happy-radio[data-name="' + name + '"][data-value="' + value + '"]';
       happy_radio = document.querySelector(selector);
       if (happy_radio) {
         return happy_radio.classList.add('active');
