@@ -26,7 +26,7 @@ class Happy
 	thicknessify: (input, happy_input) ->
 		if input.classList.contains('thin')
 			happy_input.classList.add('thin')
-		
+
 
 	setNames: (input, happy_input) ->
 		happy_input.setAttribute('data-name', input.getAttribute('name'))
@@ -135,6 +135,9 @@ class Happy
 		e.preventDefault()
 
 		selector = 'input[type=checkbox][name="'+happy_input.getAttribute('data-name')+'"]'
+		value = happy_input.getAttribute('data-value')
+		if typeof(value != 'undefined') and value != false and value != null
+			selector += '[value="' + value + '"]'
 		input = document.querySelector(selector)
 
 		if input
@@ -162,6 +165,9 @@ class Happy
 
 	checkCheckboxState: (input) =>
 		selector = '.happy-checkbox[data-name="'+input.getAttribute('name')+'"]'
+		value = input.getAttribute('value')
+		if typeof(value != 'undefined') and value != false and value != null
+			selector += '[data-value="' + value + '"]'
 		element = document.querySelector(selector)
 
 		if element
