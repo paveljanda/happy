@@ -135,7 +135,7 @@ Happy = (function() {
   };
 
   Happy.prototype.checkCheckboxStateOnClick = function(e) {
-    var event, happy_input, ie, input, selector;
+    var event, happy_input, ie, input, selector, value;
     if (e.target.tagName === 'svg') {
       happy_input = e.target.parentNode;
     } else if (e.target.tagName === 'rect') {
@@ -148,6 +148,10 @@ Happy = (function() {
     }
     e.preventDefault();
     selector = 'input[type=checkbox][name="' + happy_input.getAttribute('data-name') + '"]';
+    value = happy_input.getAttribute('data-value');
+    if (typeof (value !== 'undefined') && value !== false && value !== null) {
+      selector += '[value="' + value + '"]';
+    }
     input = document.querySelector(selector);
     if (input) {
       if (happy_input.classList.contains('active')) {
@@ -179,8 +183,12 @@ Happy = (function() {
   };
 
   Happy.prototype.checkCheckboxState = function(input) {
-    var element, selector;
+    var element, selector, value;
     selector = '.happy-checkbox[data-name="' + input.getAttribute('name') + '"]';
+    value = input.getAttribute('value');
+    if (typeof (value !== 'undefined') && value !== false && value !== null) {
+      selector += '[data-value="' + value + '"]';
+    }
     element = document.querySelector(selector);
     if (element) {
       if (input.checked) {

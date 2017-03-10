@@ -1,8 +1,6 @@
 .active.happy-checkbox,.active.happy-radio,.happy-checkbox,.happy-color,.happy-color.active,.happy-color.primary,.happy-radio,.primary.happy-checkbox,.primary.happy-radio{color:#333}
 .active.happy-checkbox>b,.active.happy-radio>b,.happy-checkbox>b,.happy-color.active>b,.happy-color.primary>b,.happy-color>b,.happy-radio>b,.primary.happy-checkbox>b,.primary.happy-radio>b{background-color:#333}
-.happy-checkbox,.happy-checkbox svg{-webkit-border-radius:2.67px;-moz-border-radius:2.67px}
-.happy-checkbox,.happy-radio{width:16px;height:16px;border-style:solid;line-height:20px;vertical-align:middle}
-.happy-checkbox svg,.happy-radio b{-ms-transition:all 180ms;-webkit-transition:all 180ms}
+.happy-checkbox,.happy-radio{line-height:20px;vertical-align:middle;width:16px;height:16px;border-style:solid;box-sizing:border-box}
 .happy-color.primary.active,.primary.active.happy-checkbox,.primary.active.happy-radio{color:#4C86BB}
 .happy-color.primary.active>b,.primary.active.happy-checkbox>b,.primary.active.happy-radio>b{background-color:#4C86BB}
 .happy-color.success,.success.happy-checkbox,.success.happy-radio{color:#333}
@@ -40,10 +38,10 @@
 .happy-border-color.white,.white.happy-radio{border-color:rgba(51,51,51,.8)}
 .happy-border-color.white.active,.white.active.happy-radio{border-color:#fff}
 input[type=checkbox].happy,input[type=radio].happy{position:absolute;top:-50%;left:-50%;opacity:0}
+.happy-checkbox,label{position:relative;cursor:pointer}
 .noselect,label:not(.selectable){-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
-label{cursor:pointer;position:relative}
-.happy-checkbox{border-color:#333;margin-right:.2em;position:relative;display:inline-block;border-width:2px;cursor:pointer;box-sizing:border-box;top:-2px;border-radius:2.67px}
-.happy-checkbox svg{position:absolute;display:block;top:-2px;left:-2px;height:16px;width:16px;opacity:0;border-radius:2.67px;background-color:#333;-ms-transform:scale(.4);-webkit-transform:scale(.4);transform:scale(.4);transition:all 180ms}
+.happy-checkbox{border-color:#333;margin-right:.2em;display:inline-block;border-width:2px;top:-2px;-webkit-border-radius:2.67px;-moz-border-radius:2.67px;border-radius:2.67px}
+.happy-checkbox svg{position:absolute;display:block;top:-2px;left:-2px;height:16px;width:16px;opacity:0;-webkit-border-radius:2.67px;-moz-border-radius:2.67px;border-radius:2.67px;background-color:#333;-ms-transform:scale(.4);-webkit-transform:scale(.4);transform:scale(.4);-ms-transition:all 180ms;-webkit-transition:all 180ms;transition:all 180ms}
 .happy-checkbox svg rect{fill:#fff}
 .happy-checkbox svg rect:first-child{-ms-transform:rotate(45deg);-webkit-transform:rotate(45deg);transform:rotate(45deg)}
 .happy-checkbox svg rect:nth-child(2){-ms-transform:rotate(-45deg);-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}
@@ -65,8 +63,8 @@ label{cursor:pointer;position:relative}
 .happy-checkbox.white svg rect{fill:#333}
 .happy-checkbox.active{border-color:transparent}
 .happy-checkbox.active svg{opacity:1;-ms-transform:scale(1);-webkit-transform:scale(1);transform:scale(1)}
-.happy-radio{position:relative;display:inline-block;border-width:2px;cursor:pointer;box-sizing:border-box;top:-2px;-webkit-border-radius:16px;-moz-border-radius:16px;border-radius:16px}
+.happy-radio{position:relative;display:inline-block;border-width:2px;cursor:pointer;top:-2px;-webkit-border-radius:16px;-moz-border-radius:16px;border-radius:16px}
 .happy-radio.thin{border-width:1.67px}
-.happy-radio b{position:absolute;display:block;top:2px;left:2px;bottom:2px;right:2px;opacity:0;-webkit-border-radius:10.67px;-moz-border-radius:10.67px;border-radius:10.67px;-ms-transform:scale(.4);-webkit-transform:scale(.4);transform:scale(.4);transition:all 180ms}
+.happy-radio b{position:absolute;display:block;top:2px;left:2px;bottom:2px;right:2px;opacity:0;-webkit-border-radius:10.67px;-moz-border-radius:10.67px;border-radius:10.67px;-ms-transform:scale(.4);-webkit-transform:scale(.4);transform:scale(.4);-ms-transition:all 180ms;-webkit-transition:all 180ms;transition:all 180ms}
 .happy-radio.active b{opacity:1;-ms-transform:scale(1);-webkit-transform:scale(1);transform:scale(1)}
 .happy-radio.focus{outline:0;-webkit-box-shadow:0 0 5px 0 rgba(50,50,50,.75);-moz-box-shadow:0 0 5px 0 rgba(50,50,50,.75);box-shadow:0 0 5px 0 rgba(50,50,50,.75)}
