@@ -1,6 +1,6 @@
 # Happy components
 
-See [demo](http://happy.paveljanda.com)
+See [demo](http://paveljanda.github.io/happy/example/)
 
 ## Installation
 
