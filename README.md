@@ -24,13 +24,25 @@ npm install happy-inputs
 	</script>
 </head>
 <body>
-	<!-- Default - black -->
+	<!-- Default (black) radio -->
 	<label>
 		<input class="happy" type="radio" name="animal" value="dog"> A dog
 	</label>
 
-	<!-- Colored (as you are used to from Bootstrap) -->
-	<input class="happy primary">
+	<!-- Default (black) checkbox -->
+	<label>
+		<input class="happy" type="checkbox" name="hungry"> Hungry
+	</label>
+
+	<!-- Colored (as you are used to from Bootstrap) radio -->
+	<label>
+		<input class="happy success" type="radio" name="animal" value="dog"> A dog
+	</label>
+
+	<!-- Colored (as you are used to from Bootstrap) checkbox -->
+	<label>
+		<input class="happy primary" type="checkbox" name="hungry"> Hungry
+	</label>
 </body>
 </html>
 ```
