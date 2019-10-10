@@ -18,7 +18,7 @@ npm install happy-inputs
 	<link rel="stylesheet" type="text/css" href="./node_modules/happy-inputs/src/happy.css">
 
 	<script type="module">
-		import happy from './node_modules/happy-inputs/src/happy.js';
+		import happy from './node_modules/happy-inputs/src/index.js';
 
 		Happy.init();
 	</script>
