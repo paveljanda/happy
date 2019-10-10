@@ -1,6 +1,6 @@
 {
   "name": "happy-inputs-example",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,6 @@
   "author": "Pavel Janda <me@paveljanda.com>",
   "license": "MIT",
   "dependencies": {
-    "happy-inputs": "^2.0.3"
+    "happy-inputs": "^2.0.4"
   }
 }
