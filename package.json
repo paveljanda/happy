@@ -1,31 +1,15 @@
 {
-  "name": "happy-inputs",
-  "version": "2.0.2",
-  "description": "Happy form inputs",
-  "main": "src/Happy.js",
-  "directories": {
-    "example": "example"
-  },
-  "dependencies": {},
-  "devDependencies": {},
+  "name": "happy-inputs-example",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/paveljanda/happy.git"
-  },
-  "keywords": [
-    "forms",
-    "inputs",
-    "happy",
-    "checkbox",
-    "radio"
-  ],
+  "keywords": [],
   "author": "Pavel Janda <me@paveljanda.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/paveljanda/happy/issues"
-  },
-  "homepage": "https://github.com/paveljanda/happy#readme"
+  "dependencies": {
+    "happy-inputs": "^2.0"
+  }
 }
