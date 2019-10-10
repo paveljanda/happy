@@ -1,4 +1,4 @@
-class Happy {
+export default class Happy {
 	constructor() {
 		this.colors = ['primary', 'success', 'info', 'warning', 'danger', 'white', 'gray']
 		this.templates = {
@@ -220,5 +220,3 @@ class Happy {
 		this.checkRadioState(event.target);
 	}
 }
-
-export default new Happy;

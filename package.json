@@ -1,6 +1,6 @@
 {
   "name": "happy-inputs",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Happy form inputs",
   "main": "src/Happy.js",
   "directories": {
