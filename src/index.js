@@ -1,3 +1,3 @@
-import Happy from './Happy';
+import Happy from './Happy.js';
 
 export default happy;
