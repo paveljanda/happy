@@ -1,226 +1,241 @@
-(function() {
-    "use strict";
-    class src$Happy$$Happy {
-        constructor() {
-            this.colors = ['primary', 'success', 'info', 'warning', 'danger', 'white', 'gray']
-            this.templates = {
-                radio: '<div class="happy-radio"><b></b></div>',
-                checkbox: '<div class="happy-checkbox"><svg viewBox="0 0 30 30"><rect class="mark-storke" x="15" y="3" rx="1" ry="1" width="10" height="4"/><rect class="mark-storke" x="-7" y="21" rx="1" ry="1" width="19" height="4"/></svg></div>',
-                text: '',
-                textarea: ''
-            }
-        }
+"use strict";
 
-        init() {
-            this.removeBySelector('.happy-radio');
-            this.removeBySelector('.happy-checkbox');
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = void 0;
 
-            this.initRadio();
-            this.initCheckbox();
-        }
+function _instanceof(left, right) { if (right != null && typeof Symbol !== "undefined" && right[Symbol.hasInstance]) { return !!right[Symbol.hasInstance](left); } else { return left instanceof right; } }
 
-        /**
-         * Back compatibility
-         */
-        reset() {
-            this.init();
-        }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-        addColorToInput(input, happyInput, classString) {
-            if (input.classList.contains(classString)) {
-                happyInput.classList.add(classString);
-            }
+function _classCallCheck(instance, Constructor) { if (!_instanceof(instance, Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-            if (input.classList.contains(classString + '-border')) {
-                happyInput.classList.add(classString + '-border');
-            }
-        }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-        addThinkessToInput(input, happyInput) {
-            if (input.classList.contains('thin')) {
-                happyInput.classList.add('thin');
-            }
-        }
+var Happy = function Happy() {
+	var _this = this;
 
-        setNames(input, happyInput) {
-            happyInput.setAttribute('data-name', input.getAttribute('name'));
+	_classCallCheck(this, Happy);
 
-            var value = input.getAttribute('value');
+	_defineProperty(this, "init", function () {
+		_this.removeBySelector('.happy-radio');
 
-            if (value !== 'undefined' && value !== false && value !== null) {
-                happyInput.setAttribute('data-value', input.getAttribute('value'));
-            }
-        }
+		_this.removeBySelector('.happy-checkbox');
 
-        removeBySelector(selector) {
-            document.querySelectorAll(selector).forEach(function(el) {
-                el.parentNode.removeChild(el);
-            });
-        }
+		_this.initRadio();
 
+		_this.initCheckbox();
+	});
 
-        initRadio() {
-            document.querySelectorAll('input[type=radio].happy').forEach((input) => {
-                /**
-                 * Paste happy component into html
-                 */
-                input.insertAdjacentHTML('afterend', this.templates.radio);
-                var happyInput = input.nextElementSibling;
+	_defineProperty(this, "reset", function () {
+		_this.init();
+	});
 
-                /**
-                 * Add optional colors
-                 */
-                this.colors.forEach((color) => {
-                    this.addColorToInput(input, happyInput, color);
-                    this.setNames(input, happyInput);
-                });
+	_defineProperty(this, "addColorToInput", function (input, happyInput, classString) {
+		if (input.classList.contains(classString)) {
+			happyInput.classList.add(classString);
+		}
 
-                this.addThinkessToInput(input, happyInput);
+		if (input.classList.contains(classString + '-border')) {
+			happyInput.classList.add(classString + '-border');
+		}
+	});
 
-                /**
-                 * Init state
-                 */
-                this.checkRadioState(input);
+	_defineProperty(this, "addThinkessToInput", function (input, happyInput) {
+		if (input.classList.contains('thin')) {
+			happyInput.classList.add('thin');
+		}
+	});
 
-                /**
-                 * Set aciton functionality for native change
-                 */
-                document.addEventListener('change', this.radioOnChange);
-            });
-        }
+	_defineProperty(this, "setNames", function (input, happyInput) {
+		happyInput.setAttribute('data-name', input.getAttribute('name'));
+		var value = input.getAttribute('value');
 
-        initCheckbox() {
-            document.querySelectorAll('input[type=checkbox].happy').forEach(function(input) {
-                /**
-                 * Paste happy component into html
-                 */
-                input.insertAdjacentHTML('afterend', this.templates.checkbox);
-                var happyInput = input.nextElementSibling
+		if (value !== 'undefined' && value !== false && value !== null) {
+			happyInput.setAttribute('data-value', input.getAttribute('value'));
+		}
+	});
 
-                /**
-                 * Add optional colors
-                 */
-                this.colors.forEach(function(color) {
-                    this.addColorToInput(input, happyInput, color);
-                    this.setNames(input, happyInput);
-                });
+	_defineProperty(this, "removeBySelector", function (selector) {
+		document.querySelectorAll(selector).forEach(function (el) {
+			el.parentNode.removeChild(el);
+		});
+	});
 
-                this.addThinkessToInput(input, happyInput);
+	_defineProperty(this, "initRadio", function () {
+		document.querySelectorAll('input[type=radio].happy').forEach(function (input) {
+			/**
+			 * Paste happy component into html
+			 */
+			input.insertAdjacentHTML('afterend', _this.templates.radio);
+			var happyInput = input.nextElementSibling;
+			/**
+			 * Add optional colors
+			 */
 
-                /**
-                 * Init state
-                 */
-                this.checkCheckboxState(input);
+			_this.colors.forEach(function (color) {
+				_this.addColorToInput(input, happyInput, color);
 
-                /**
-                 * Set action functionality for click || native change
-                 */
-                document.addEventListener('click', this.checkCheckboxStateOnClick);
-                document.addEventListener('change', this.checkCheckboxStateOnChange);
-            });
-        }
+				_this.setNames(input, happyInput);
+			});
+
+			_this.addThinkessToInput(input, happyInput);
+			/**
+			 * Init state
+			 */
 
 
-        checkCheckboxStateOnClick(event) {
-            var happyInput;
+			_this.checkRadioState(input);
+			/**
+			 * Set aciton functionality for native change
+			 */
 
-            if (event.target.tagName === 'svg') {
-                happyInput = event.target.parentNode;
-            } else if (event.target.tagName === 'rect') {
-                happyInput = event.target.parentNode.parentNode;
-            } else {
-                happyInput = event.target;
-            }
 
-            if (!happyInput || !happyInput.classList.contains('happy-checkbox')) {
-                return;
-            }
+			document.addEventListener('change', _this.radioOnChange);
+		});
+	});
 
-            event.preventDefault();
+	_defineProperty(this, "initCheckbox", function () {
+		document.querySelectorAll('input[type=checkbox].happy').forEach(function (input) {
+			/**
+			 * Paste happy component into html
+			 */
+			input.insertAdjacentHTML('afterend', _this.templates.checkbox);
+			var happyInput = input.nextElementSibling;
+			/**
+			 * Add optional colors
+			 */
 
-            var selector = 'input[type=checkbox][name="' + happyInput.getAttribute('data-name') + '"]';
-            var value = happyInput.getAttribute('data-value');
+			_this.colors.forEach(function (color) {
+				_this.addColorToInput(input, happyInput, color);
 
-            if (typeof(value != 'undefined') && value != false && value != null) {
-                selector += '[value="' + value + '"]';
-            }
+				_this.setNames(input, happyInput);
+			});
 
-            var input = document.querySelector(selector);
+			_this.addThinkessToInput(input, happyInput);
+			/**
+			 * Init state
+			 */
 
-            if (input) {
-                if (happyInput.classList.contains('active')) {
-                    input.checked = false;
-                    happyInput.classList.remove('active');
-                } else {
-                    input.checked = true;
-                    happyInput.classList.add('active');
-                }
 
-                if (window.navigator.userAgent.indexOf("MSIE ")) {
-                    event = document.createEvent('Event')
-                    event.initEvent('change', true, true);
-                } else {
-                    event = new Event('change', {'bubbles': true});
-                }
+			_this.checkCheckboxState(input);
+			/**
+			 * Set action functionality for click || native change
+			 */
 
-                input.dispatchEvent(event);
-            }
-        }
 
-        checkCheckboxStateOnChange(event) {
-            if (event.target.classList.contains('happy')) {
-                this.checkCheckboxState(event.target);
-            }
-        }
+			document.addEventListener('click', _this.checkCheckboxStateOnClick);
+			document.addEventListener('change', _this.checkCheckboxStateOnChange);
+		});
+	});
 
-        checkRadioState(input) {
-            if (input.checked) {
-                var name = input.getAttribute('name');
-                var value = input.getAttribute('value');
-                var selector = '.happy-radio[data-name="' + name + '"][data-value="' + value + '"]';
+	_defineProperty(this, "checkCheckboxStateOnClick", function (event) {
+		var happyInput;
 
-                var happyRadio = document.querySelector(selector);
+		if (event.target.tagName === 'svg') {
+			happyInput = event.target.parentNode;
+		} else if (event.target.tagName === 'rect') {
+			happyInput = event.target.parentNode.parentNode;
+		} else {
+			happyInput = event.target;
+		}
 
-                if (happyRadio) {
-                    happyRadio.classList.add('active');
-                }
-            }
-        }
+		if (!happyInput || !happyInput.classList.contains('happy-checkbox')) {
+			return;
+		}
 
-        checkCheckboxState(input) {
-            var selector = '.happy-checkbox[data-name="' + input.getAttribute('name') + '"]';
+		event.preventDefault();
+		var selector = 'input[type=checkbox][name="' + happyInput.getAttribute('data-name') + '"]';
+		var value = happyInput.getAttribute('data-value');
 
-            var value = input.getAttribute('value');
+		if (_typeof(value != 'undefined') && value != false && value != null) {
+			selector += '[value="' + value + '"]';
+		}
 
-            if (typeof(value != 'undefined') && value != false && value != null) {
-                selector += '[data-value="' + value + '"]';
-            }
+		var input = document.querySelector(selector);
 
-            var element = document.querySelector(selector);
+		if (input) {
+			if (happyInput.classList.contains('active')) {
+				input.checked = false;
+				happyInput.classList.remove('active');
+			} else {
+				input.checked = true;
+				happyInput.classList.add('active');
+			}
 
-            if (element) {
-                if (input.checked) {
-                    element.classList.add('active');
-                } else {
-                    element.classList.remove('active');
-                }
-            }
-        }
+			if (window.navigator.userAgent.indexOf("MSIE ")) {
+				event = document.createEvent('Event');
+				event.initEvent('change', true, true);
+			} else {
+				event = new Event('change', {
+					'bubbles': true
+				});
+			}
 
-        radioOnChange(event) {
-            if (!event.target.classList.contains('happy')) {
-                return;
-            }
+			input.dispatchEvent(event);
+		}
+	});
 
-            var name = event.target.getAttribute('name');
-            var selector = '.happy-radio[data-name="' + name + '"]';
+	_defineProperty(this, "checkCheckboxStateOnChange", function (event) {
+		if (event.target.classList.contains('happy')) {
+			_this.checkCheckboxState(event.target);
+		}
+	});
 
-            document.querySelectorAll(selector).forEach(function(happyRadio) {
-                happyRadio.classList.remove('active');
-            });
+	_defineProperty(this, "checkRadioState", function (input) {
+		if (input.checked) {
+			var name = input.getAttribute('name');
+			var value = input.getAttribute('value');
+			var selector = '.happy-radio[data-name="' + name + '"][data-value="' + value + '"]';
+			var happyRadio = document.querySelector(selector);
 
-            this.checkRadioState(event.target);
-        }
-    }
-    var src$Happy$$default = src$Happy$$Happy;
-}).call(this);
+			if (happyRadio) {
+				happyRadio.classList.add('active');
+			}
+		}
+	});
+
+	_defineProperty(this, "checkCheckboxState", function (input) {
+		var selector = '.happy-checkbox[data-name="' + input.getAttribute('name') + '"]';
+		var value = input.getAttribute('value');
+
+		if (_typeof(value != 'undefined') && value != false && value != null) {
+			selector += '[data-value="' + value + '"]';
+		}
+
+		var element = document.querySelector(selector);
+
+		if (element) {
+			if (input.checked) {
+				element.classList.add('active');
+			} else {
+				element.classList.remove('active');
+			}
+		}
+	});
+
+	_defineProperty(this, "radioOnChange", function (event) {
+		if (!event.target.classList.contains('happy')) {
+			return;
+		}
+
+		var name = event.target.getAttribute('name');
+		var selector = '.happy-radio[data-name="' + name + '"]';
+		document.querySelectorAll(selector).forEach(function (happyRadio) {
+			happyRadio.classList.remove('active');
+		});
+
+		_this.checkRadioState(event.target);
+	});
+
+	this.colors = ['primary', 'success', 'info', 'warning', 'danger', 'white', 'gray'];
+	this.templates = {
+		radio: '<div class="happy-radio"><b></b></div>',
+		checkbox: '<div class="happy-checkbox"><svg viewBox="0 0 30 30"><rect class="mark-storke" x="15" y="3" rx="1" ry="1" width="10" height="4"/><rect class="mark-storke" x="-7" y="21" rx="1" ry="1" width="19" height="4"/></svg></div>',
+		text: '',
+		textarea: ''
+	};
+};
+
+exports.default = Happy;
