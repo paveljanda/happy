@@ -8,7 +8,7 @@ See [demo](http://paveljanda.github.io/happy/)
 npm install happy-inputs
 ```
 
-## Usage
+## Usage - ES6 module
 
 ```html
 <!DOCTYPE html>
@@ -45,4 +45,25 @@ npm install happy-inputs
 	</label>
 </body>
 </html>
+```
+
+## Usage - ES5
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Happy</title>
+	<link rel="stylesheet" type="text/css" href="./node_modules/happy-inputs/src/happy.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/happy-inputs@2.1.0/src/nomodule-es5-fallback.js"></script>
+	<script>
+		var happy = new Happy;
+
+		happy.init();
+	</script>
+
+	<!-- ... -->
+</head>
+<body>
 ```
